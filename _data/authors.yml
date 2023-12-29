@@ -2,12 +2,14 @@
 # Must be the same as `author` in `_config.yml`.
 # Change `author1` to your shortname.
 author1:
-  name: wellbird
-  email: wellbird@naver.com
+  name:              wellbird
+  email:             wellbird@naver.com
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
-  about: test
+  about:             |
+    우물 밖으로 나와 세상을 향해 날갯짓하는 그날을 위해🕊️<br/>
+    For the day I come out of the well and fly my wings to the world🕊️
 
   # This photo will be used in the about section
   # picture:
@@ -21,9 +23,9 @@ author1:
   # Comment/uncommet to show/hide
   # Rearrange to change the order in which they appear
   social:
-    github: wellbird
-    instagram: https://www.instagram.com/wellbird/
-    Site: https://wontfolio.com/
+    github:          wellbird
+    instagram:       https://www.instagram.com/wellbird/
+    Site:            https://wontfolio.com/
     # twitter:         <username>
     # email:           <mail@domain.tld>
     # rss:             https://<url>/feed.xml

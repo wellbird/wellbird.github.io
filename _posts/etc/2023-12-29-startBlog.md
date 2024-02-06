@@ -65,3 +65,8 @@ comments : true
 
 블로그를 시점으로 꾸준히 포트폴리오 사이트도 제작할 예정이다. 1일 1 프로그래머스 문제 풀이는 하지 못하더라도 여유가 생길 때마다 문제를 풀고 커밋도 할 것이다.<br/>
 
+<br/>
+<br/>
+<center>
+  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwellbird.github.io%2Ffe%2F2023-12-29-startBlog%2F&count_bg=%23BBBBBB&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=View&edge_flat=false" />
+</center>

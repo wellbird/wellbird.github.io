@@ -1,0 +1,50 @@
+h1 {
+  text-align: center;
+  margin-top: 100px;
+}
+
+hr {
+  width: 80%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#txt_welcome {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.card {
+  text-align: center;
+}
+
+.card_title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.card_subtitle {
+  font-weight: bold;
+  font-size: 15px;
+  color: gray;
+}
+
+.card_button {
+  border-radius: 30px;
+  background-color: black;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  width: 150px;
+  height: 30px;
+}
+
+.card_img {
+  height: 200px;
+}
+
+#item_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

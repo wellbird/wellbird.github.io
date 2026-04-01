@@ -1,0 +1,75 @@
+// 폰트
+:root {
+  --sys-font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --code-font-family: "JetBrains Mono", Consolas, Monaco, "Courier New", monospace;
+  --article-font-family: var(--sys-font-family);
+}
+
+// 본문
+.article-content {
+  font-size: 1.7rem;
+  line-height: 1.8;
+}
+
+// 코드 블록
+.article-content pre code {
+  font-size: 0.75em;
+}
+
+// 각주
+.article-content .footnotes {
+  font-size: 0.75em;
+}
+
+.article-content .footnotes ol {
+  padding-left: 1.2em;
+}
+
+// 제목 앵커 링크
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+  border-inline-start: none;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.article-content h1 a.header-anchor:before,
+.article-content h2 a.header-anchor:before,
+.article-content h3 a.header-anchor:before,
+.article-content h4 a.header-anchor:before,
+.article-content h5 a.header-anchor:before,
+.article-content h6 a.header-anchor:before {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  background: currentColor;
+  opacity: 0.25;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") no-repeat center;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E") no-repeat center;
+}
+
+// 사이드바
+.site-visitors {
+  font-size: 0.85rem;
+  color: var(--card-text-color-secondary);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.menu-social {
+  justify-content: center;
+}
+
+// 조회수
+.page-views {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}

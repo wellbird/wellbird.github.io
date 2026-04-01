@@ -1,71 +1,40 @@
 <!-- Naver Search Advisor -->
-<meta
-  name="naver-site-verification"
-  content="21acec1d89cefae4b6bc6ad0749ef9526e3456a9"
-/>
+<meta name="naver-site-verification" content="21acec1d89cefae4b6bc6ad0749ef9526e3456a9" />
 
 <!-- Google Search Console -->
-<meta
-  name="google-site-verification"
-  content="oBD0DENM6nS57Sok2lc6-ZyagmII5kDxAopTjfNoYkg"
-/>
+<meta name="google-site-verification" content="oBD0DENM6nS57Sok2lc6-ZyagmII5kDxAopTjfNoYkg" />
 
-<!-- 추가 SEO 메타 -->
+<!-- SEO -->
 <meta name="author" content="wellbird" />
 
-<!-- GoatCounter 방문자 분석 -->
-<script
-  data-goatcounter="https://wellbird.goatcounter.com/count"
-  async
-  src="//gc.zgo.at/count.js"
-></script>
+<!-- Pretendard -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 
-<!-- GoatCounter 조회수 표시 -->
+<!-- JetBrains Mono -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" />
+
+<!-- GoatCounter -->
+<script data-goatcounter="https://wellbird.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var API = "https://wellbird.goatcounter.com";
+document.addEventListener("DOMContentLoaded", function () {
+  var API = "https://wellbird.goatcounter.com";
 
-    // 글별 조회수
-    document.querySelectorAll(".page-views").forEach(function (el) {
-      var path = el.dataset.path.replace(/\/$/, "") || "/";
-      fetch(API + "/counter/" + encodeURIComponent(path) + ".json")
-        .then(function (r) {
-          return r.ok ? r.json() : null;
-        })
-        .then(function (d) {
-          if (d) el.querySelector(".view-count").textContent = d.count_unique;
-        })
-        .catch(function () {});
-    });
-
-    // 총 방문자수 (사이드바)
-    var totalEl = document.getElementById("total-visitors");
-    if (totalEl) {
-      fetch(API + "/counter/TOTAL.json")
-        .then(function (r) {
-          return r.ok ? r.json() : null;
-        })
-        .then(function (d) {
-          if (d) totalEl.textContent = d.count_unique;
-        })
-        .catch(function () {});
-    }
+  document.querySelectorAll(".page-views").forEach(function (el) {
+    var path = el.dataset.path.replace(/\/$/, "") || "/";
+    fetch(API + "/counter/" + encodeURIComponent(path) + ".json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d) el.querySelector(".view-count").textContent = d.count_unique; })
+      .catch(function () {});
   });
-</script>
 
-<style>
-  .site-visitors {
-    font-size: 0.85rem;
-    color: var(--card-text-color-secondary);
-    margin-top: 0.5rem;
-    text-align: center;
+  var totalEl = document.getElementById("total-visitors");
+  if (totalEl) {
+    fetch(API + "/counter/TOTAL.json")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d) totalEl.textContent = d.count_unique; })
+      .catch(function () {});
   }
-  .page-views {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  .menu-social {
-    justify-content: center;
-  }
-</style>
+});
+</script>

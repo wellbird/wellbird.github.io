@@ -1,30 +1,27 @@
-baseURL: "https://wellbird.github.io/"  # GitHub Pages URL (본인 username으로 변경)
+baseURL: "https://wellbird.github.io/"
 languageCode: "ko-KR"
 title: "WWH.dev"
 theme: "hugo-theme-stack"
 
-# SEO: 검색엔진 최적화
 enableRobotsTXT: true
 enableEmoji: true
 
-# Sitemap 설정 (Google 크롤링용)
+# Sitemap
 sitemap:
   changefreq: "weekly"
   priority: 0.5
   filename: "sitemap.xml"
 
-# 퍼머링크 구조 (SEO 친화적 URL)
+# URL 구조
 permalinks:
   post: "/post/:slug/"
   page: "/:slug/"
 
-# 마크다운 렌더링
+# 마크다운
 markup:
   highlight:
-    anchorLineNos: false
     codeFences: true
-    guessSyntax: false
-    lineNos: true
+    lineNos: false
     noClasses: false
     style: "dracula"
   tableOfContents:
@@ -32,36 +29,25 @@ markup:
     ordered: true
     startLevel: 2
 
-# ========================
-# Stack 테마 설정
-# ========================
+# 테마 설정
 params:
   favicon: "favicon.png"
-  # 블로그 기본 정보
   mainSections:
     - post
   description: "What, Why, How - Blockchain & Web Dev"
-  
-  # SEO: Open Graph / Twitter Card
-  opengraph:
-    twitter:
-      site: ""   # 트위터 핸들 있으면 입력
-      card: "summary_large_image"
 
-  # 사이드바 설정
   sidebar:
     subtitle: "What, Why, How - Blockchain & Web Dev"
-    avatar: "img/avatar.png"  # static/img/avatar.png에 프로필 이미지 넣기
+    avatar: "img/avatar.png"
 
-  # 글 목록 설정
   article:
-    math: false
-    toc: true          # 글 내 목차 자동 생성
-    readingTime: true   # 예상 읽기 시간
+    toc: true
+    readingTime: true
+    headingAnchor: true
     license:
       enabled: false
 
-  # 댓글 (필요시 활성화)
+  # Giscus 댓글
   comments:
     enabled: true
     provider: "giscus"
@@ -80,40 +66,30 @@ params:
       lang: "ko"
       loading: "lazy"
 
-  # 위젯 (사이드바)
+  # 사이드바 위젯
   widgets:
     homepage:
-      - type: search        # 검색 기능
-      - type: categories     # 카테고리 목록
+      - type: search
+      - type: categories
         params:
           limit: 10
-      - type: tag-cloud      # 태그 클라우드
+      - type: tag-cloud
         params:
           limit: 20
     page:
-      - type: toc            # 글 페이지 목차
+      - type: toc
 
-  # 기본 이미지 (SEO: OG 이미지)
-  defaultImage:
-    opengraph:
-      enabled: false
-      local: false
-
-  # 컬러 테마
   colorScheme:
-    toggle: true    # 다크모드 토글
-    default: "auto" # 시스템 설정 따라감
+    toggle: true
+    default: "auto"
 
-  # 이미지 처리
   imageProcessing:
     cover:
       enabled: true
     content:
       enabled: true
 
-# ========================
-# 메뉴 설정
-# ========================
+# 메뉴
 menu:
   main:
     - identifier: home
@@ -160,21 +136,18 @@ menu:
         icon: link
         newTab: true
 
-# ========================
-# 카테고리 & 태그 분류
-# ========================
 taxonomies:
   category: categories
   tag: tags
 
-# 출력 포맷 (SEO: JSON 검색 인덱스 + RSS)
+# 출력 포맷
 outputs:
   home:
     - HTML
     - RSS
-    - JSON   # Stack 검색 기능에 필요
+    - JSON
 
-# 관련 글 추천 설정
+# 관련 글 추천
 related:
   includeNewer: true
   threshold: 60

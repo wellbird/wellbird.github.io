@@ -36,7 +36,7 @@ markup:
 # Stack 테마 설정
 # ========================
 params:
-  favicon: "favicon.ico"
+  favicon: "favicon.png"
   # 블로그 기본 정보
   mainSections:
     - post

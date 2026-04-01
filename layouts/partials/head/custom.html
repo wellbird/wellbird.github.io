@@ -1,0 +1,65 @@
+<!-- Naver Search Advisor (인증코드 받은 후 교체) -->
+<!-- <meta name="naver-site-verification" content="YOUR_NAVER_CODE" /> -->
+
+<!-- Google Search Console (인증코드 받은 후 교체) -->
+<!-- <meta name="google-site-verification" content="YOUR_GOOGLE_CODE" /> -->
+
+<!-- 추가 SEO 메타 -->
+<meta name="author" content="Wellbird" />
+
+<!-- GoatCounter 방문자 분석 -->
+<script
+  data-goatcounter="https://wellbird.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js"
+></script>
+
+<!-- GoatCounter 조회수 표시 -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var API = "https://wellbird.goatcounter.com";
+
+    // 글별 조회수
+    document.querySelectorAll(".page-views").forEach(function (el) {
+      var path = el.dataset.path.replace(/\/$/, "") || "/";
+      fetch(API + "/counter/" + encodeURIComponent(path) + ".json")
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (d) {
+          if (d) el.querySelector(".view-count").textContent = d.count_unique;
+        })
+        .catch(function () {});
+    });
+
+    // 총 방문자수 (사이드바)
+    var totalEl = document.getElementById("total-visitors");
+    if (totalEl) {
+      fetch(API + "/counter/TOTAL.json")
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (d) {
+          if (d) totalEl.textContent = d.count_unique;
+        })
+        .catch(function () {});
+    }
+  });
+</script>
+
+<style>
+  .site-visitors {
+    font-size: 0.85rem;
+    color: var(--card-text-color-secondary);
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .page-views {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .menu-social {
+    justify-content: center;
+  }
+</style>

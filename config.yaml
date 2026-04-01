@@ -1,0 +1,186 @@
+baseURL: "https://wellbird.github.io/"  # GitHub Pages URL (본인 username으로 변경)
+languageCode: "ko-KR"
+title: "WWH.dev"
+theme: "hugo-theme-stack"
+
+# SEO: 검색엔진 최적화
+enableRobotsTXT: true
+enableEmoji: true
+
+# Sitemap 설정 (Google 크롤링용)
+sitemap:
+  changefreq: "weekly"
+  priority: 0.5
+  filename: "sitemap.xml"
+
+# 퍼머링크 구조 (SEO 친화적 URL)
+permalinks:
+  post: "/post/:slug/"
+  page: "/:slug/"
+
+# 마크다운 렌더링
+markup:
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    lineNos: true
+    noClasses: false
+    style: "dracula"
+  tableOfContents:
+    endLevel: 4
+    ordered: true
+    startLevel: 2
+
+# ========================
+# Stack 테마 설정
+# ========================
+params:
+  favicon: "favicon.ico"
+  # 블로그 기본 정보
+  mainSections:
+    - post
+  description: "What, Why, How - Blockchain & Web Dev"
+  
+  # SEO: Open Graph / Twitter Card
+  opengraph:
+    twitter:
+      site: ""   # 트위터 핸들 있으면 입력
+      card: "summary_large_image"
+
+  # 사이드바 설정
+  sidebar:
+    subtitle: "What, Why, How - Blockchain & Web Dev"
+    avatar: "img/avatar.png"  # static/img/avatar.png에 프로필 이미지 넣기
+
+  # 글 목록 설정
+  article:
+    math: false
+    toc: true          # 글 내 목차 자동 생성
+    readingTime: true   # 예상 읽기 시간
+    license:
+      enabled: false
+
+  # 댓글 (필요시 활성화)
+  comments:
+    enabled: true
+    provider: "giscus"
+    giscus:
+      repo: "wellbird/wellbird.github.io"
+      repoID: "R_kgDOR2kYoA"
+      category: "Announcements"
+      categoryID: "DIC_kwDOR2kYoM4C5v9U"
+      mapping: "pathname"
+      strict: 1
+      reactionsEnabled: 1
+      emitMetadata: 0
+      inputPosition: "bottom"
+      lightTheme: "preferred_color_scheme"
+      darkTheme: "preferred_color_scheme"
+      lang: "ko"
+      loading: "lazy"
+
+  # 위젯 (사이드바)
+  widgets:
+    homepage:
+      - type: search        # 검색 기능
+      - type: categories     # 카테고리 목록
+        params:
+          limit: 10
+      - type: tag-cloud      # 태그 클라우드
+        params:
+          limit: 20
+    page:
+      - type: toc            # 글 페이지 목차
+
+  # 기본 이미지 (SEO: OG 이미지)
+  defaultImage:
+    opengraph:
+      enabled: false
+      local: false
+
+  # 컬러 테마
+  colorScheme:
+    toggle: true    # 다크모드 토글
+    default: "auto" # 시스템 설정 따라감
+
+  # 이미지 처리
+  imageProcessing:
+    cover:
+      enabled: true
+    content:
+      enabled: true
+
+# ========================
+# 메뉴 설정
+# ========================
+menu:
+  main:
+    - identifier: home
+      name: "Home"
+      url: "/"
+      weight: 1
+      params:
+        icon: home
+    - identifier: about
+      name: "About"
+      url: "/about/"
+      weight: 2
+      params:
+        icon: user
+    - identifier: categories
+      name: "Categories"
+      url: "/categories/"
+      weight: 3
+      params:
+        icon: categories
+    - identifier: tags
+      name: "Tags"
+      url: "/tags/"
+      weight: 4
+      params:
+        icon: tag
+    - identifier: archives
+      name: "Archives"
+      url: "/archives/"
+      weight: 5
+      params:
+        icon: archives
+
+  social:
+    - identifier: github
+      name: "GitHub"
+      url: "https://github.com/wellbird"
+      params:
+        icon: brand-github
+    - identifier: portfolio
+      name: "Portfolio"
+      url: "https://wontfolio.com"
+      params:
+        icon: link
+        newTab: true
+
+# ========================
+# 카테고리 & 태그 분류
+# ========================
+taxonomies:
+  category: categories
+  tag: tags
+
+# 출력 포맷 (SEO: JSON 검색 인덱스 + RSS)
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON   # Stack 검색 기능에 필요
+
+# 관련 글 추천 설정
+related:
+  includeNewer: true
+  threshold: 60
+  toLower: false
+  indices:
+    - name: categories
+      weight: 200
+    - name: tags
+      weight: 100

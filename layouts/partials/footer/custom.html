@@ -1,0 +1,19 @@
+<script>
+  // 블로그 다크모드 토글 -> Giscus 테마 연동
+  const observer = new MutationObserver(() => {
+    const isDark = document.documentElement.dataset.scheme === 'dark';
+    const theme = isDark ? 'dark_dimmed' : 'light';
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        'https://giscus.app'
+      );
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-scheme']
+  });
+</script>

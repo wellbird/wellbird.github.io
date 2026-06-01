@@ -29,7 +29,7 @@ function corsHeaders(): Record<string, string> {
 function jsonResponse(obj: unknown, status: number, extra: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...extra },
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", ...extra },
   });
 }
 

@@ -1,0 +1,12 @@
+{
+  "name": "blog-view-counter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "schema:local": "wrangler d1 execute blog-view-counter-db --local --file=./schema.sql",
+    "schema:remote": "wrangler d1 execute blog-view-counter-db --remote --file=./schema.sql"
+  }
+}

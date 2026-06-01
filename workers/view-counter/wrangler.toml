@@ -1,0 +1,15 @@
+name = "blog-view-counter"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "blog-view-counter-db"
+database_id = "62040daa-fcc8-4baa-ab05-bfa77cd441cf"
+
+[triggers]
+crons = ["0 18 * * *"]
+
+[vars]
+RETENTION_DAYS = "365"

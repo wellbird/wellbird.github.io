@@ -13,17 +13,18 @@
 <!-- JetBrains Mono -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" />
 
-<!-- GoatCounter -->
+<!-- GoatCounter (backup collector, not read from - transitional safety net) -->
 <script data-goatcounter="https://wellbird.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 
+<!-- View counter (Shadow Worker) -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  var API = "https://wellbird.goatcounter.com";
+  var API = "https://blog-view-counter.wellbird7.workers.dev";
 
   document.querySelectorAll(".page-views").forEach(function (el) {
     var path = el.dataset.path || "/";
-    fetch(API + "/counter/" + encodeURIComponent(path) + ".json")
+    fetch(API + "/public/page?path=" + encodeURIComponent(path))
       .then(function (r) { return r.json(); })
       .then(function (d) { el.querySelector(".view-count").textContent = (d && d.count) || "0"; })
       .catch(function () { el.querySelector(".view-count").textContent = "0"; });
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var totalEl = document.getElementById("total-visitors");
   if (totalEl) {
-    fetch(API + "/counter/TOTAL.json")
+    fetch(API + "/public/site")
       .then(function (r) { return r.json(); })
       .then(function (d) { totalEl.textContent = (d && d.count) || "0"; })
       .catch(function () { totalEl.textContent = "0"; });

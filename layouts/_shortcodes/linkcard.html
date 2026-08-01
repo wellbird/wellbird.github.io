@@ -1,0 +1,22 @@
+{{- $url := .Get "url" -}}
+{{- $title := .Get "title" -}}
+{{- $desc := .Get "description" -}}
+{{- $imageParam := .Get "image" -}}
+{{- $imageUrl := "" -}}
+{{- with $imageParam -}}
+  {{- if or (hasPrefix . "http://") (hasPrefix . "https://") (hasPrefix . "/") -}}
+    {{- $imageUrl = . -}}
+  {{- else -}}
+    {{- with $.Page.Resources.GetMatch . -}}
+      {{- $imageUrl = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="link-card">
+  {{ with $imageUrl }}<div class="link-card-image"><img src="{{ . }}" alt="" loading="lazy" /></div>{{ end }}
+  <div class="link-card-body">
+    <div class="link-card-title">{{ $title }}</div>
+    {{ with $desc }}<div class="link-card-desc">{{ . }}</div>{{ end }}
+    <div class="link-card-url">{{ $url }}</div>
+  </div>
+</a>

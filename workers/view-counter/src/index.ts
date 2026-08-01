@@ -13,6 +13,7 @@ const WINDOW_8H_MS = 8 * 60 * 60 * 1000;
 const KST_OFFSET_MS = 9 * 60 * 60 * 1000;
 const DAY_MS = 86_400_000;
 const MAX_EVENTS_SCAN = 200_000;
+const PUBLIC_CACHE_TTL = 300;
 
 const BOT_RE =
   /bot|crawl|spider|slurp|bing|baidu|yandex|duckduck|facebookexternalhit|embedly|quora|pinterest|slackbot|telegrambot|whatsapp|preview|monitor|curl|wget|python-requests|go-http|java\/|headless|phantom|puppeteer|playwright|lighthouse|pingdom|uptime|gptbot|claudebot|ccbot|perplexity/i;
@@ -23,6 +24,13 @@ function corsHeaders(): Record<string, string> {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
+  };
+}
+
+function publicReadHeaders(): Record<string, string> {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": `public, max-age=${PUBLIC_CACHE_TTL}, s-maxage=${PUBLIC_CACHE_TTL}`,
   };
 }
 
@@ -108,7 +116,7 @@ function kstDayStartUtcMs(dateStr: string): number {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders() });
@@ -118,6 +126,12 @@ export default {
     }
     if (request.method === "GET" && url.pathname === "/s") {
       return handleSummary(request, env, url);
+    }
+    if (request.method === "GET" && url.pathname === "/public/site") {
+      return withEdgeCache(request, ctx, () => handlePublicSite(env));
+    }
+    if (request.method === "GET" && url.pathname === "/public/page") {
+      return withEdgeCache(request, ctx, () => handlePublicPage(env, url));
     }
     return jsonResponse({ error: "not_found" }, 404);
   },
@@ -180,6 +194,41 @@ async function handleCollect(request: Request, env: Env): Promise<Response> {
     .run();
 
   return jsonResponse({ counted: true }, 200, headers);
+}
+
+async function handlePublicSite(env: Env): Promise<Response> {
+  const row = await env.DB.prepare(
+    `SELECT COUNT(DISTINCT visitor_key) AS uv FROM events`,
+  ).first<{ uv: number }>();
+  return jsonResponse({ count: row?.uv ?? 0 }, 200, publicReadHeaders());
+}
+
+async function handlePublicPage(env: Env, url: URL): Promise<Response> {
+  const path = url.searchParams.get("path");
+  if (!validPath(path)) {
+    return jsonResponse({ error: "bad_path" }, 400, publicReadHeaders());
+  }
+  const row = await env.DB.prepare(
+    `SELECT COUNT(DISTINCT visitor_key) AS uv FROM events WHERE path = ?1`,
+  )
+    .bind(path)
+    .first<{ uv: number }>();
+  return jsonResponse({ count: row?.uv ?? 0 }, 200, publicReadHeaders());
+}
+
+async function withEdgeCache(
+  request: Request,
+  ctx: ExecutionContext,
+  compute: () => Promise<Response>,
+): Promise<Response> {
+  const cache = caches.default;
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  const response = await compute();
+  if (response.status === 200) {
+    ctx.waitUntil(cache.put(request, response.clone()));
+  }
+  return response;
 }
 
 async function handleSummary(request: Request, env: Env, url: URL): Promise<Response> {

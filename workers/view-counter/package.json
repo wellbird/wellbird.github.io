@@ -8,5 +8,8 @@
     "tail": "wrangler tail",
     "schema:local": "wrangler d1 execute blog-view-counter-db --local --file=./schema.sql",
     "schema:remote": "wrangler d1 execute blog-view-counter-db --remote --file=./schema.sql"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260801.1"
   }
 }

@@ -198,9 +198,9 @@ async function handleCollect(request: Request, env: Env): Promise<Response> {
 
 async function handlePublicSite(env: Env): Promise<Response> {
   const row = await env.DB.prepare(
-    `SELECT COUNT(DISTINCT visitor_key) AS uv FROM events`,
-  ).first<{ uv: number }>();
-  return jsonResponse({ count: row?.uv ?? 0 }, 200, publicReadHeaders());
+    `SELECT COUNT(*) AS c FROM events`,
+  ).first<{ c: number }>();
+  return jsonResponse({ count: row?.c ?? 0 }, 200, publicReadHeaders());
 }
 
 async function handlePublicPage(env: Env, url: URL): Promise<Response> {
@@ -209,11 +209,11 @@ async function handlePublicPage(env: Env, url: URL): Promise<Response> {
     return jsonResponse({ error: "bad_path" }, 400, publicReadHeaders());
   }
   const row = await env.DB.prepare(
-    `SELECT COUNT(DISTINCT visitor_key) AS uv FROM events WHERE path = ?1`,
+    `SELECT COUNT(*) AS c FROM events WHERE path = ?1`,
   )
     .bind(path)
-    .first<{ uv: number }>();
-  return jsonResponse({ count: row?.uv ?? 0 }, 200, publicReadHeaders());
+    .first<{ c: number }>();
+  return jsonResponse({ count: row?.c ?? 0 }, 200, publicReadHeaders());
 }
 
 async function withEdgeCache(
